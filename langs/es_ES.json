@@ -17,6 +17,19 @@
       "intent": "saludos.hola",
       "utterances": ["hola", "Un saludo", "ey"],
       "answers": ["Que pasa!", "Saludos!"]
+    },
+    {
+      "intent": "saludos.comoestas",
+      "utterances": [
+        "¿Qué tal?",
+        "¿Cómo te va el día?",
+        "¿Cómo estas?",
+        "¿Estas bien?"
+      ],
+      "answers": [
+        "¡Tengo un día maravilloso!",
+        "¡Genial! Gracias por preguntar"
+      ]
     }
   ]
 }
