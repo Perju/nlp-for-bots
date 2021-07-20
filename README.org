@@ -1,0 +1,9 @@
+* Api REST nlp
+Aplicación que contesta a peticiones GET usando nlp para buscar la respuesta
+correcta. No es exclusivo para los bots pero es ideal para entrenar el modelo en
+un solo servicio y poder usarlo con todos los bots que queramos.
+
+para que funcione la primera vez, hay que crear el fichero =.env= y asignar a la
+variable TRAIN el valor true o intentaremos cargar un modelo que todavía no
+existe. Una vez entrenado se puede asignar el valor false o eliminar la variable
+y se cargara el modelo generado.
