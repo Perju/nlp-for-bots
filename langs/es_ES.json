@@ -11,12 +11,24 @@
         "hasta la próxima",
         "tengo que irme"
       ],
-      "answers": ["Hasta la próxima", "¡Nos vemos pronto!"]
+      "answers": [
+        "Hasta la próxima",
+        "¡Nos vemos pronto!",
+
+        {
+          "answer": "hasta la próxima {{nombre}}!",
+          "opts": "nombre!==undefined"
+        }
+      ]
     },
     {
       "intent": "saludos.hola",
       "utterances": ["hola", "Un saludo", "ey"],
-      "answers": ["Que pasa!", "Saludos!"]
+      "answers": [
+        "¡Que pasa!",
+        "¡Saludos!",
+        { "answer": "¡Hola {{nombre}}!", "opts": "nombre!==undefined" }
+      ]
     },
     {
       "intent": "saludos.comoestas",
