@@ -34,14 +34,19 @@ app.get("/nlp", async (req, res) => {
   const context = new ConversationContext();
   let frase = req.body.frase || "nothing";
   let guess = language.guess(frase, ["en", "es"])[0].alpha2;
-  let nombre = req.body.nombre;
-  context.nombre = nombre;
-  console.log(context);
+  context.nombre = req.body.nombre;
+  context.relacion = req.body.relacion || "neutral";
   let response = await manager.process(guess, frase, context);
-  console.log(response);
-  res.send(response.answer);
+  const answer = rndElem(response.answer);
+  res.send(answer);
 });
 
 app.listen(port, () => {
   console.log(`La aplicación esta escuchando en el puerto ${port}`);
 });
+
+const rndElem = (arr) => {
+  return arr === undefined
+    ? "No entiendo que dices"
+    : arr[Math.floor(Math.random() * arr.length)];
+};

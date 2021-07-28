@@ -11,12 +11,38 @@
         "bye for now",
         "i must go"
       ],
-      "answers": ["till next time", "see you soon!"]
+      "answers": [
+        {
+          "answer": ["till next time", "see you soon!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["till next time crack", "see you soon!"],
+          "opts": "relacion==='buena'"
+        },
+        {
+          "answer": ["Bye bye idiot", "What are you waiting for?"],
+          "opts": "relacion==='mala'"
+        }
+      ]
     },
     {
       "intent": "greetings.hello",
       "utterances": ["hello", "hi", "howdy"],
-      "answers": ["Hey there!", "Greetings!"]
+      "answers": [
+        {
+          "answer": ["Hey there!", "Greetings!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["Hey there {{nombre}}!", "Greetings {{nombre}}!"],
+          "opts": "relacion==='buena'"
+        },
+        {
+          "answer": ["Hi idiot", "Oh no, another time! :("],
+          "opts": "relacion==='mala'"
+        }
+      ]
     },
     {
       "intent": "greetings.howareyou",
@@ -29,8 +55,22 @@
         "are you alright"
       ],
       "answers": [
-        "Feeling wonderful!",
-        "Wonderful! Thanks for asking"
+        {
+          "answer": ["Nice, thanks", "I'm fine, thanks"],
+          "opts": "relacion==='neutral'"
+        },{
+          "answer": [
+            "Feeling wonderful!",
+            "Wonderful! Thanks for asking"
+          ],
+          "opts": "relacion==='buena'"
+        },{
+          "answer": [
+            "Fine until you've arrived!",
+            "Oh no not again"
+          ],
+          "opts": "relacion==='mala'"
+        }
       ]
     }
   ]

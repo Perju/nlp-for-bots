@@ -12,22 +12,33 @@
         "tengo que irme"
       ],
       "answers": [
-        "Hasta la próxima",
-        "¡Nos vemos pronto!",
-
         {
-          "answer": "hasta la próxima {{nombre}}!",
-          "opts": "nombre!==undefined"
-        }
+          "answer": ["Hasta la próxima", "¡Nos vemos pronto!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["hasta la próxima {{nombre}}!"],
+          "opts": "relacion==='buena'"
+        },
+        { "answer": ["Ya estas tardando"], "opts": "relacion==='mala'" }
       ]
     },
     {
       "intent": "saludos.hola",
       "utterances": ["hola", "Un saludo", "ey"],
       "answers": [
-        "¡Que pasa!",
-        "¡Saludos!",
-        { "answer": "¡Hola {{nombre}}!", "opts": "nombre!==undefined" }
+        {
+          "answer": ["¡Que pasa!", "¡Saludos!"],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": ["Hola pesadico", "Otra vez no :("],
+          "opts": "relacion==='mala'"
+        },
+        {
+          "answer": ["¡Hola {{nombre}}!", "¡Que pasa {{nombre}}!"],
+          "opts": "relacion==='buena'"
+        }
       ]
     },
     {
@@ -39,8 +50,27 @@
         "¿Estas bien?"
       ],
       "answers": [
-        "¡Tengo un día maravilloso!",
-        "¡Genial! Gracias por preguntar"
+        {
+          "answer": [
+            "Tengo un buen día, gracias",
+            "Hoy me siento bien"
+          ],
+          "opts": "relacion==='neutral'"
+        },
+        {
+          "answer": [
+            "¡Tengo un día maravilloso!",
+            "¡Genial! Gracias por preguntar"
+          ],
+          "opts": "relacion==='buena'"
+        },
+        {
+          "answer": [
+            "Bien hasta que has llegado",
+            "Ahora ya no es tan bueno"
+          ],
+          "opts": "relacion==='mala'"
+        }
       ]
     }
   ]
