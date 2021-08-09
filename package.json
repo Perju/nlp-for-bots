@@ -2,11 +2,12 @@
   "name": "nlp-for-bots",
   "version": "1.0.0",
   "description": "nlp para los bots de discord y twitch",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node test.js",
+    "dev": "nodemon test.js"
   },
   "author": "Juan Pablo Pérez",
   "license": "MIT",

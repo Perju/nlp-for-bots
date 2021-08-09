@@ -1,52 +1,42 @@
-const { NlpManager, Language, ConversationContext } = require("node-nlp");
-const express = require("express");
+//const { NlpManager, Language, ConversationContext } = require("node-nlp");
+import { NlpManager, Language, ConversationContext } from "node-nlp";
 
-// train or load model
-let train = process.env.TRAIN || false;
-
-let modelFilename = "./model.nlp";
-
-// NLP part
-const manager = new NlpManager({ languages: ["en", "es"], forceNER: true });
-const language = new Language();
-
-manager.addCorpus("./langs/en_EN.json");
-manager.addCorpus("./langs/es_ES.json");
-
-(async () => {
-  if (train === "true") {
-    console.log("entrenando nlp");
-    await manager.train();
-    manager.save(modelFilename);
-  } else {
-    console.log("cargando datos nlp");
-    manager.load(modelFilename);
+class Nlp {
+  constructor(config){
+    this.env = config.env;
+    this.train = config.env.TRAIN || false;
+    this.modelFile = "./model.nlp";
+    this.manager = new NlpManager({ languages: ["en", "es"], forceNER: true });
+    this.language = new Language();
   }
-})();
 
-// Expressjs part
-let app = express();
-let port = process.env.PORT || 3000;
+  async init(){
+    this.manager.addCorpus("./langs/en_EN.json");
+    this.manager.addCorpus("./langs/es_ES.json");
+    if (this.train === "true") {
+      console.log("entrenando nlp");
+      await this.manager.train();
+      this.manager.save(this.modelFile);
+    } else {
+      console.log("cargando datos nlp");
+      this.manager.load(this.modelFile);
+    }
+  }
 
-app.use(express.json());
-
-app.get("/nlp", async (req, res) => {
-  const context = new ConversationContext();
-  let frase = req.body.frase || "nothing";
-  let guess = language.guess(frase, ["en", "es"])[0].alpha2;
-  context.nombre = req.body.nombre;
-  context.relacion = req.body.relacion || "neutral";
-  let response = await manager.process(guess, frase, context);
-  const answer = rndElem(response.answer);
-  res.send(answer);
-});
-
-app.listen(port, () => {
-  console.log(`La aplicación esta escuchando en el puerto ${port}`);
-});
+  async response(frase, nombre, relacion) {
+    const context = new ConversationContext();
+    let guess = this.language.guess(frase, ["en", "es"])[0].alpha2;
+    context.nombre = nombre;
+    context.relacion = relacion;
+    let response = await this.manager.process(guess, frase, context);
+    return rndElem(response.answer);
+  }
+}
 
 const rndElem = (arr) => {
   return arr === undefined
     ? "No entiendo que dices"
     : arr[Math.floor(Math.random() * arr.length)];
 };
+
+export default Nlp;
